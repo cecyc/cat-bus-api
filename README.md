@@ -40,7 +40,7 @@ Go to [http://localhost:5000/api/ui/](http://localhost:5000/api/ui/) on  your br
 
 ## Database design and queries
 
-## Design
+### Design
 
 I thought about what I wanted to do with the data, and while I'm not sure if putting the txt files in a database was a requirement for the challenge, I decided to do so, because I knew this data would be very interrelated, and I knew I would have an easier time working with the data with a database.
 
