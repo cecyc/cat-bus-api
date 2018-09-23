@@ -29,7 +29,7 @@ The API server is a Flask app that uses the Swagger spec. Using `docker-compose 
 
 ## Swagger Spec
 
-![Swagger UI](app/static/img/catbus.gif)
+![Swagger UI](app/static/img/swagger-ui.png)
 
 Go to [http://localhost:5000/api/ui/](http://localhost:5000/api/ui/) on  your browser to check out the spec and make test calls!
 
