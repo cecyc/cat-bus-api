@@ -6,6 +6,7 @@ Simple API wrapper for Austin's Capmetro GTFS data.
 
 ## Stack
 
+1. Python 3
 1. Docker handles standing up the MySQL database and Flask app
 1. Flask server handles API requests
 1. Swagger defines API and provides a UI for exploring the API
@@ -17,7 +18,7 @@ Simple API wrapper for Austin's Capmetro GTFS data.
 This API requires [Docker](https://www.docker.com) to run locally.
 
 1. `docker-compose build && docker-compose up` to build and bring up the project.
-1. From the root directory, `pip install -r requirements.txt`. This pretty much only installs Pandas, which is needed to backfill data in the MySQL database.
+1. From the root directory, `pip install -r requirements.txt`. This pretty much only installs Pandas and PeeWee, which is needed to backfill data in the MySQL database.
 1. Run the backfill: `python backfill.py`. Note: Backfilling stops, routes, and trips is pretty fast, but stop times will take a while. Drink some tea. 🍵
 
 ## Run the server
@@ -25,9 +26,9 @@ This API requires [Docker](https://www.docker.com) to run locally.
 The API server is a Flask app that uses the Swagger spec. Using `docker-compose up` should bring up both the database and the Flask app.
 
 1. The Flask app and API should be running on [localhost:5000](http://localhost:5000)
-1. You should be able to curl the API on `http://localhost:5000/api` or use an app like [POSTMAN](https://www.getpostman.com/)
+1. You should be able to curl the API on `http://localhost:5000/api` or use an app like [POSTMAN](https://www.getpostman.com/), or the Swagger UI link below.
 
-## Swagger Spec
+## Swagger
 
 ![Swagger UI](app/static/img/swagger-ui.png)
 
