@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    command: mysqld
+    environment:
+      MYSQL_DATABASE: bus_data
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+    volumes:
+      - ./migrations:/docker-entrypoint-initdb.d
+  app:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    links:
+      - db
+    ports:
+    - '5000:5000'
+    command: python server.py

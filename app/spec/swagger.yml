@@ -1,0 +1,156 @@
+swagger: "2.0"
+info:
+  description: Swagger Spec for Cat Bus API based on CapMetro ATX data
+  version: "1.0.0"
+  title: Cat Bus API
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /routes:
+    get:
+      operationId: api.list_routes
+      tags:
+        - Routes
+      summary: List all available routes
+      description: List all available routes
+      parameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Number of routes to return, default to 25, max 25
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          description: Offset from beginning of routes list, default 0
+          required: false
+      responses:
+        200:
+          description: Successfull list all routes
+          schema:
+            type: array
+            items:
+              properties:
+                route_id:
+                  type: integer
+                route_nickname:
+                  type: string
+        400:
+          description: Bad request
+  /routes/{route_id}:
+    get:
+      operationId: api.get_route
+      tags:
+        - Route
+      summary: Get a specific route
+      description: Get a specific route
+      parameters:
+        - name: route_id
+          in: path
+          type: integer
+          description: Route ID for which to fetch trips
+          required: true
+      responses:
+        200:
+          description: Data for a specific route
+          schema:
+            type: array
+            items:
+              properties:
+                route_id:
+                  type: integer
+                route_nickname:
+                  type: string
+        404:
+          description: Route not found
+  /routes/{route_id}/trips:
+    get:
+      operationId: api.list_routes_trips
+      tags:
+        - Trips
+      summary: List all available trips for a route
+      description: List all available trips for a route
+      parameters:
+        - name: route_id
+          in: path
+          type: integer
+          description: Route ID for which to fetch trips
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: Number of trips to return, default to 25, max 25
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          description: Offset from beginning of trips list, default 0
+          required: false
+      responses:
+        200:
+          description: Successfull list of all trips for a route
+          schema:
+            type: array
+            items:
+              properties:
+                route_id:
+                  type: integer
+                trip_id:
+                  type: integer
+                trip_headsign:
+                  type: string
+        400:
+          description: Bad request
+        404:
+          description: Route not found
+  /routes/{route_id}/trips/{trip_id}/stops:
+    get:
+      operationId: api.list_trip_stops
+      tags:
+        - Stops
+      summary: List all stops for a trip
+      description: List all stops for a trip
+      parameters:
+        - name: route_id
+          in: path
+          type: integer
+          description: Route ID for the trip to fetch stops
+          required: true
+        - name: trip_id
+          in: path
+          type: integer
+          description: Trip ID for which to fetch stops
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: Number of stops to return, default to 25, max 25
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          description: Offset from beginning of stops list, default 0
+          required: false
+      responses:
+        200:
+          description: Successfull list of all stops for a trip
+          schema:
+            type: array
+            items:
+              properties:
+                route_id:
+                  type: integer
+                trip_id:
+                  type: integer
+                trip_headsign:
+                  type: string
+        400:
+          description: Bad request
+        404:
+          description: Trip not found
